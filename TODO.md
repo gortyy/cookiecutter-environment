@@ -8,5 +8,10 @@
     * (/) install cookiecutter from pypi
     * (/) run cookiecutter as specified in readme
     * (x) work on getting proper setup (add nginx and postgresql to docker-compose)
-* (x) forward vagrant machine ports to host
+* (/) forward vagrant machine ports to host
 * (x) test ansible playbook with kitchenCI
+
+```
+(/) - done
+(x) - todo
+```

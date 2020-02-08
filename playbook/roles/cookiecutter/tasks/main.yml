@@ -3,6 +3,15 @@
   args:
     creates: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}"
 
+- name: Copy edited docker-compose, PostgreSQL image and db init script
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}/{{ item|basename }}"
+  with_items:
+    - "{{ role_path }}/files/docker-compose.yaml"
+    - "{{ role_path }}/files/create.sql"
+    - "{{ role_path }}/files/Dockerfile.postgres"
+
 - name: Reset ssh connection to make sure that current user has access to docker daemon
   meta: reset_connection
 

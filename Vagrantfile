@@ -15,4 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
     ansible.playbook = "playbook/playbook.yml"
   end
+
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
 end
