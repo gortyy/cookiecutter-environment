@@ -3,14 +3,30 @@
   args:
     creates: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}"
 
-- name: Copy edited docker-compose, PostgreSQL image and db init script
+- name: Copy PostgreSQL image and db init script
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}/{{ item|basename }}"
   with_items:
-    - "{{ role_path }}/files/docker-compose.yml"
     - "{{ role_path }}/files/create.sql"
     - "{{ role_path }}/files/Dockerfile.postgres"
+
+- name: Insert postgres service
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}/docker-compose.yml"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    insertafter: "services:"
+    block: |2
+        postgres:
+          container_name: postgres
+          build:
+            dockerfile: Dockerfile.postgres
+            context: .
+          ports:
+            - "5435:5432"
+          environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
 
 - name: Reset ssh connection to make sure that current user has access to docker daemon
   meta: reset_connection
