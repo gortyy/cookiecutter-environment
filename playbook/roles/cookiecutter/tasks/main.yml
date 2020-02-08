@@ -8,7 +8,7 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}/{{ item|basename }}"
   with_items:
-    - "{{ role_path }}/files/docker-compose.yaml"
+    - "{{ role_path }}/files/docker-compose.yml"
     - "{{ role_path }}/files/create.sql"
     - "{{ role_path }}/files/Dockerfile.postgres"
 
