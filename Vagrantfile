@@ -11,8 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.galaxy_role_file = "ansible-requirements.yml"
+    ansible.galaxy_role_file = "playbook/ansible-requirements.yml"
     ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
-    ansible.playbook = "playbook.yml"
+    ansible.playbook = "playbook/playbook.yml"
   end
 end
