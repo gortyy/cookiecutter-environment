@@ -3,7 +3,10 @@
   args:
     creates: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}"
 
-- name: Setup {{ cookiecutter_project_environment }} environment with docker-compose
+- name: Reset ssh connection to make sure that current user has access to docker daemon
+  meta: reset_connection
+
+- name: Setup project with docker-compose
   docker_compose:
     project_src: "{{ cookiecutter_project_name }}"
   register: output
