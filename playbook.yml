@@ -1,0 +1,5 @@
+- name: Install docker and docker-compose
+  hosts: app
+  roles:
+    - role: geerlingguy.docker
+      become: yes
