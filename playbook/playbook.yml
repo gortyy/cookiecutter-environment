@@ -8,9 +8,9 @@
         update_cache: yes
       become: yes
   roles:
-    # - role: geerlingguy.pip
-    #   become: yes
-    # - role: geerlingguy.docker
-    #   docker_users: "{{ ansible_user }}"
-    #   become: yes
+    - role: geerlingguy.pip
+      become: yes
+    - role: geerlingguy.docker
+      docker_users: "{{ ansible_user }}"
+      become: yes
     - cookiecutter
