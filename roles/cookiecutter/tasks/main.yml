@@ -1,0 +1,12 @@
+- name: Initialize cookiecutter project
+  command: cookiecutter --no-input {{ cookiecutter_project }}
+  args:
+    creates: "{{ ansible_env.HOME }}/{{ cookiecutter_project_name }}"
+
+- name: Setup {{ cookiecutter_project_environment }} environment with docker-compose
+  docker_compose:
+    project_src: "{{ cookiecutter_project_name }}"
+  register: output
+
+- debug:
+    var: output
