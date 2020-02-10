@@ -1,0 +1,16 @@
+- name: Install docker and docker-compose
+  hosts: app
+  vars_files:
+    - vars/main.yml
+  pre_tasks:
+    - name: Run apt update to resolve issues when installing python3-pip
+      apt:
+        update_cache: yes
+      become: yes
+  roles:
+    - role: geerlingguy.pip
+      become: yes
+    - role: geerlingguy.docker
+      docker_users: "{{ ansible_user }}"
+      become: yes
+    - cookiecutter
